@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DATA SENSOR DHT11</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2 style="text-align: center; font-family: Arial, sans-serif; color: #333;">DATA SENSOR DHT11</h2>
+        <h3 style="text-align: center; font-family: Arial, sans-serif; color: #666;">KONTROL LED2 (LUAR RUANGAN)</h3>
+        <div class="button" style="text-align: center;">
+            <!-- <a href="/on" class="on-btn"><button class="button">ON</button></a>
+            <a href="/off"><button class="button button2">OFF</button></a> -->
+        </div>
+        <h3 style="text-align: center; font-family: Arial, sans-serif; color: #666;">GRAFIK SENSOR DHT11</h3>
+        <div id="chart-temperature" class="container" style="text-align: center;"></div>
+        <div id="chart-humidity" class="container" style="text-align: center;"></div>
+        <div class="footer">
+            <p>Created by <a href="#" target="_blank">Alfin</a> &#128515;</p>
+        </div>
+        
+    </div>
+</body>
+    
+<script>
+    var chartT = new Highcharts.Chart({
+        chart: { renderTo: 'chart-temperature' },
+        title: { text: 'DHT11 Temperature' },
+
+        series: [{
+            showInLegend: false,
+            data: []
+        }],
+        plotOptions: {
+            line: {
+                animation: false,
+                dataLabels: { enabled: true }
+            },
+            series: { color: '#059e8a' }
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { second: '%H:%M:%S' }
+        },
+        yAxis: {
+            title: { text: 'Temperature (Celsius)' }
+            //title: { text: 'Temperature (Fahrenheit)' }
+        },
+        credits: { enabled: false }
+    });
+    setInterval(function () {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var x = (new Date()).getTime(),
+                    y = parseFloat(this.responseText);
+                //console.log(this.responseText);
+                if (chartT.series[0].data.length > 40) {
+                    chartT.series[0].addPoint([x, y], true, true, true);
+                } else {
+                    chartT.series[0].addPoint([x, y], true, false, true);
+                }
+            }
+        };
+        xhttp.open("GET", "/temperature", true);
+        xhttp.send();
+    }, 5000);
+    var chartH = new Highcharts.Chart({
+        chart: { renderTo: 'chart-humidity' },
+        title: { text: 'DHT11 Humidity' },
+        series: [{
+            showInLegend: false,
+            data: []
+        }],
+        plotOptions: {
+            line: {
+                animation: false,
+                dataLabels: { enabled: true }
+            }
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { second: '%H:%M:%S' }
+        },
+        yAxis: {
+            title: { text: 'Humidity (%)' }
+        },
+        credits: { enabled: false }
+    });
+    setInterval(function () {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var x = (new Date()).getTime(),
+                    y = parseFloat(this.responseText);
+                //console.log(this.responseText);
+                if (chartH.series[0].data.length > 40) {
+                    chartH.series[0].addPoint([x, y], true, true, true);
+                } else {
+                    chartH.series[0].addPoint([x, y], true, false, true);
+                }
+            }
+        };
+        xhttp.open("GET", "/humidity", true);
+        xhttp.send();
+    }, 5000);
+
+    function showAlert() {
+        alert("LED2 ON");
+    }
+</script>
+</html>

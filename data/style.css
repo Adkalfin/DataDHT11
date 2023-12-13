@@ -1,0 +1,105 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+    text-align: center;
+}
+
+.container h2{
+    overflow: hidden;
+    display: inline-block; /* Membuat elemen h2 menjadi inline */
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .2em;
+    animation: 
+        typing 3.5s steps(20, end),
+        blink-caret .70s step-end infinite;
+}
+
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 50% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+}
+
+.container p {
+    margin: 20px 0;
+}
+
+.button {
+    margin-top: 10px;
+}
+
+.button a {
+    text-decoration: none;
+}
+
+.button button {
+    padding: 10px 20px;
+    background-color: yellow;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.button button:hover {
+    background-color: red;
+}
+
+.button2 {
+    margin-left: 10px;
+}
+
+#chart-temperature, #chart-humidity {
+    height: 300px;
+    margin-top: 20px;
+}
+
+.on-btn {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.footer{
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+    text-align: center;
+    background-color: orange;
+    border-radius: 10px;
+}
+
+.footer p {
+    margin: 0;
+    color: #fff;
+    overflow: hidden;
+    display: inline-block; /* Membuat elemen h2 menjadi inline */
+    border-right: .15em solid #fff;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .2em;
+    animation: 
+        typing 3.5s steps(20, end),
+        blink-caret .70s step-end infinite;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #fff;
+}
